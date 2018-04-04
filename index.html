@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html onclick="playJarJar()">
+
+<head>
+  <title>Jar Jar's Jar Jar Jar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial;
+      font-size: 17px;
+    }
+
+    #jar-jar {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+    .content {
+      position: fixed;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #f1f1f1;
+      width: 100%;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Google Analytics -->
+  <script>
+    window.ga = window.ga || function() {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <!-- End Google Analytics -->
+  <video muted loop id="jar-jar">
+  <source src="jar-jar.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+  <script>
+    var video = document.getElementById("jar-jar");
+
+    function pauseJarJar() {
+      video.pause();
+      if (video.currentTime != 0) video.currentTime = 0;
+    }
+
+    function playJarJar() {
+      video.play();
+      setTimeout(pauseJarJar, video.duration * 1000);
+
+      document.body.onkeyup = function(e) {
+        if (e.keyCode == 32) {
+          playJarJar();
+        }
+      }
+    }
+  </script>
+
+</body>
+
+</html>
