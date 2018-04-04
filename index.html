@@ -9,18 +9,51 @@
       box-sizing: border-box;
     }
 
+    @font-face {
+      font-family: "Star Jedi";
+      src: url("starjedi.ttf");
+    }
+
     body {
       margin: 0;
-      font-family: Arial;
+      font-family: Star Jedi;
       font-size: 17px;
     }
 
+    .main-container {
+      justify-content: space-around;
+      background: black;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .box {
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+    }
+
+    .box .row.header {
+      text-align: center;
+      color: #FFD80A;
+      flex: 0 1 auto;
+      font-size: 2vw;
+    }
+
+    .box .row.footer {
+      color: white;
+      flex: 0 1 auto;
+      text-align: center;
+    }
+
     #jar-jar {
-      position: fixed;
+      height: 100vh;
       right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
+      /*bottom: 0;*/
+    }
+
+    #ajarAttempts {
+      font-size: 30vh;
     }
 
     .content {
@@ -29,7 +62,6 @@
       background: rgba(0, 0, 0, 0.5);
       color: #f1f1f1;
       width: 100%;
-      padding: 20px;
     }
   </style>
 </head>
@@ -41,29 +73,49 @@
       (ga.q = ga.q || []).push(arguments)
     };
     ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('create', 'UA-75026068-2', 'auto');
     ga('send', 'pageview');
   </script>
-  
+
+
   <script async src='https://www.google-analytics.com/analytics.js'></script>
   <!-- End Google Analytics -->
-  <video muted loop id="jar-jar">
-  <source src="jar-jar.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
+  <div class="main-container">
+    <video muted loop id="jar-jar">
+      <source src="jar-jar.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <div class="box">
+      <div class="row header">
+        <p><b>Jar Jar's Jar Jar Jar</b>
+      </div>
+      <div class="row footer">
+        <p>Jar Jar's Attempts to Make the Jar Ajar:</p>
+      </div>
+      <div class="row footer">
+        <span id="ajarAttempts">0</span>
+      </div>
+      <div class="row content">
+        <p>By: <b>Declan Li-Carney</b></p>
+      </div>
+    </div>
+  </div>
   <script>
     var video = document.getElementById("jar-jar");
+    var playing = false;
 
     function pauseJarJar() {
       video.pause();
       if (video.currentTime != 0) video.currentTime = 0;
+      playing = false;
     }
 
     function playJarJar() {
+      if (playing) return;
+      playing = true;
+      document.getElementById("ajarAttempts").textContent++;
       video.play();
       setTimeout(pauseJarJar, video.duration * 1000);
-
       document.body.onkeyup = function(e) {
         if (e.keyCode == 32) {
           playJarJar();
